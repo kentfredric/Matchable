@@ -8,13 +8,8 @@ use lib 't/lib';
 use T1;
 use T2;
 
-# ph
 my $phfoo = ph(foo);
-eq_or_diff(blessed($phfoo),'Matchable::Placeholder',"ph: foo is a placeholder");
-eq_or_diff($phfoo->name,'foo',"ph: foo's name is foo");
 my $phbar = ph(bar);
-eq_or_diff(blessed($phbar),'Matchable::Placeholder',"ph: bar is a placeholder");
-eq_or_diff($phbar->name,'bar',"ph: bar's name is bar");
 
 # isa_ph
 eq_or_diff( isa_ph('foo'),  undef, "isa_ph: strings are undef");
