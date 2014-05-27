@@ -88,7 +88,7 @@ sub _equiv_hash {
 
 sub _equiv_one {
   my ($self, $left, $right, $placeholders) = @_;
-  return undef unless defined($left) eq defined($right);
+  return undef if ( grep defined, ( $left, $right )) < 2;
   return $self->_equiv_placeholder($left,$right,$placeholders) if isa_ph($left) || isa_ph($right);
   if (blessed($left)) {
     # It doesn't make sense if we're handed a *less* specific class
