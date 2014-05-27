@@ -18,25 +18,15 @@ my $ret;
 
 my %ph;
 
-# TODO: Nested placeholders
-eq_or_diff($t1->_equiv_array([1,2,3],     [1,2,3]),     [1,2,3],     "_equiv_array: integers equate cleanly");
-eq_or_diff($t1->_equiv_array([qw(a b c)], [qw(a b c)]), [qw(a b c)], "_equiv_array: strings equate cleanly");
-eq_or_diff($t1->_equiv_array({},          []),          undef,       "_equiv_array: when one argument is a hashref, undef (left)");
-eq_or_diff($t1->_equiv_array([],          {}),          undef,       "_equiv_array: when one argument is a hashref, undef (right)");
-eq_or_diff($t1->_equiv_array([1..3],      [4..6]),      undef,       "_equiv_array: unequivalent ARRAYs are undef");
 
-my $ret;
-
-$ret = $t1->_equiv_array([$t1,$t1],[$t1,$t1]);
-eq_or_diff($ret, [$t1,$t1], "_equiv_array: t1s equate cleanly");
-$ret->[0]->{'val'} = 'bar';
-eq_or_diff($t1->val, 'foo', "_equiv_array: t1s clone cleanly");
 # _equiv_hash
 eq_or_diff($t1->_equiv_hash(+{qw(a b c d)},+{qw(a b c d)}),+{qw(a b c d)}, "_equiv_hash: strings equate cleanly");
 eq_or_diff($t1->_equiv_hash(+{a => $t1, b => $t1},+{a => $t1, b => $t1}),+{a => $t1, b => $t1}, "_equiv_hash: mixed types inc t1 equate cleanly");
 # _equiv_one
 eq_or_diff($t1->_equiv_one(2,2),2, "_equiv_one: numbers equate cleanly");
 eq_or_diff($t1->_equiv_one("foo","foo"),"foo", "_equiv_one: strings equate cleanly");
+
+my $ret;
 $ret = $t1->_equiv_one($t1,$t1);
 eq_or_diff($ret,$t1, "_equiv_one: t1s equate cleanly");
 $ret->{'val'} = 'bar';
