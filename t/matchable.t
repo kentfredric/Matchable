@@ -11,13 +11,6 @@ use T2;
 my $phfoo = ph(foo);
 my $phbar = ph(bar);
 
-my @classes = qw(Foo Bar Baz T1 Quux);
-eq_or_diff( isa_ph_or('foo'            ), undef, "isa_ph_or: basic types are undef");
-eq_or_diff( isa_ph_or($phfoo           ), 1,     "isa_ph_or: matchables are 1");
-eq_or_diff( isa_ph_or(T1->new          ), undef, "isa_ph_or: empty class lists return undef for non-matchables");
-eq_or_diff( isa_ph_or($phfoo           ), 1,     "isa_ph_or: empty class lists return 1 for matchables");
-eq_or_diff( isa_ph_or(T1->new, @classes), 1,     "isa_ph_or: the whole list is searched");
-
 # _equiv_placeholder
 
 my $t1 = T1->new(val=>'foo');
