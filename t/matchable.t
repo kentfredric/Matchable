@@ -3,38 +3,10 @@ use Test::Most;
 use Matchable qw( ph isa_ph isa_ph_or );
 use Matchable::Placeholder;
 use Scalar::Util 'blessed';
-{
-  package T1;
-  # ABSTRACT: T1 is a class that conforms to what we expect of a matchable
-  use Safe::Isa;
-  use Scalar::Util 'blessed';
-  use Moo;
-  with 'Matchable';
-  has val => (
-    is => 'ro',
-  );
-  sub _compare {['val']}
-  sub clone {
-    return bless {%{(shift)}}, 'T1';
-  }
-}
-{
-  package T2;
-  # ABSTRACT: T2 is a class that is not clone()able, so that we can test we error out correctly
-  use Safe::Isa;
-  use Scalar::Util 'blessed';
-  use Moo;
-  with 'Matchable';
-  has val => (
-    is => 'ro',
-  );
-  sub _compare {['val']}
-  sub equiv {
-    my ($self, $other) = @_;
-    return unless $other->$_isa('T1');
-    return $self if $self->val eq $other->val;
-  }
-}
+
+use lib 't/lib';
+use T1;
+use T2;
 
 # ph
 my $phfoo = ph(foo);
