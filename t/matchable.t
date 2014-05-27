@@ -11,11 +11,6 @@ use T2;
 my $phfoo = ph(foo);
 my $phbar = ph(bar);
 
-# isa_ph
-eq_or_diff( isa_ph('foo'),  undef, "isa_ph: strings are undef");
-eq_or_diff( isa_ph(123),    undef, "isa_ph: numbers are undef");
-eq_or_diff( isa_ph(qr//),   undef, "isa_ph: regexrefs are undef");
-eq_or_diff( isa_ph($phfoo), 1,     "isa_ph: placeholders are 1");
 my @classes = qw(Foo Bar Baz T1 Quux);
 eq_or_diff( isa_ph_or('foo'            ), undef, "isa_ph_or: basic types are undef");
 eq_or_diff( isa_ph_or($phfoo           ), 1,     "isa_ph_or: matchables are 1");
