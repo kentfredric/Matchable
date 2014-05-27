@@ -5,22 +5,20 @@ use Matchable qw( ph );
 use lib 't/lib';
 use T1;
 
-my $t1 = T1->new( val => 'foo' );
-my $ret;
-
-my ( %t1, %t2 );
+my %t1 = ( baz => 1 );
+my %t2 = ( baz => 1 );
 
 # equiv
-my $ph;
-( $ret, $ph ) = $t1->equiv(
-  T1->new(
-    val => [
-      {
-        a => \%t2,
-        b => ph(foobar),
-      }
-    ]
-  ),
+my $t1 = T1->new(
+  val => [
+    {
+      a => \%t2,
+      b => ph(foobar),
+    }
+  ]
+);
+
+my ( $ret, $ph ) = $t1->equiv(
   T1->new(
     val => [
       {
