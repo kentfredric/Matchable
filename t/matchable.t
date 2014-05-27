@@ -18,15 +18,10 @@ my $ret;
 
 my %ph;
 
-
-# _equiv_hash
-eq_or_diff($t1->_equiv_hash(+{qw(a b c d)},+{qw(a b c d)}),+{qw(a b c d)}, "_equiv_hash: strings equate cleanly");
-eq_or_diff($t1->_equiv_hash(+{a => $t1, b => $t1},+{a => $t1, b => $t1}),+{a => $t1, b => $t1}, "_equiv_hash: mixed types inc t1 equate cleanly");
 # _equiv_one
 eq_or_diff($t1->_equiv_one(2,2),2, "_equiv_one: numbers equate cleanly");
 eq_or_diff($t1->_equiv_one("foo","foo"),"foo", "_equiv_one: strings equate cleanly");
 
-my $ret;
 $ret = $t1->_equiv_one($t1,$t1);
 eq_or_diff($ret,$t1, "_equiv_one: t1s equate cleanly");
 $ret->{'val'} = 'bar';
@@ -70,6 +65,7 @@ $ret = $t1->_equiv_one(
 eq_or_diff($ret, T1->new(val => [{a=>\%t2,b=>\%t1}]), "_equiv_one: placeholders at sublevels on both sides are processed properly");
 eq_or_diff(\%ph, {foobar => \%t1, bazfoo => \%t2},    "_equiv_one: placeholders at sublevels on both sides are set correctly");
 
+my $t2 = T2->new();
 $t2->_equiv_one($t1,$phfoo,\%ph);
 eq_or_diff(\%ph,{foo=>$t1}, "_equiv_one: placeholders are set correctly");
 throws_ok {
