@@ -124,6 +124,7 @@ sub equiv {
 sub ph (*;$) {
   my ($name, $isa) = @_;
   $name =~ s/(.+::)(?=[a-z]+)$//i;
+  require Matchable::Placeholder;
   Matchable::Placeholder->new(name => $name, isa => $isa);
 }
 
